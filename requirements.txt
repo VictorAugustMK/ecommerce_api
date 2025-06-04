@@ -10,3 +10,4 @@ python-jose[cryptography]
 asyncpg>=0.27.0
 passlib[bcrypt]
 numpy
+python-multipart
