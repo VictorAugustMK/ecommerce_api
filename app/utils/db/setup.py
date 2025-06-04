@@ -1,12 +1,15 @@
 import configparser
 import os
 import time
+
 import psycopg2
 
-def load_config():
+
+def load_database():
     config = configparser.ConfigParser()
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     config_path = os.path.join(base_dir, ".config")
+
     if not os.path.exists(config_path):
         raise FileNotFoundError(f"Arquivo de configuração não encontrado em {config_path}")
     config.read(config_path)
@@ -14,9 +17,23 @@ def load_config():
         raise RuntimeError("Seção [DATABASE] não encontrada no arquivo .config")
     return config["DATABASE"]
 
+def load_security():
+    config = configparser.ConfigParser()
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    config_path = os.path.join(base_dir, ".config")
+
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Arquivo de configuração não encontrado em {config_path}")
+
+    config.read(config_path)
+
+    if "SECRETS" not in config:
+        raise RuntimeError("Seção [SECRETS] não encontrada no arquivo .config")
+
+    return config["SECRETS"]
 
 def get_db_connection():
-    db_config = load_config()
+    db_config = load_database()
     return psycopg2.connect(
         host=db_config.get('host', 'localhost'),
         database=db_config.get('database'),
