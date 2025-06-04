@@ -1,1 +1,1 @@
-"""Inicializador do módulo 'app' para a API da Lu Estilos."""
+"""Inicializador do módulo 'app' para a API ECommerce."""

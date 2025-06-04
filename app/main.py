@@ -1,7 +1,7 @@
-import os
+
 from fastapi import FastAPI
 
-from app.utils.db.setup import wait_for_db  # Importa o wait_for_db da função externa
+from app.utils.db.setup import wait_for_db
 from app.db.session import engine
 from app.db.base_class import Base
 
@@ -11,7 +11,7 @@ from app.routers import (
 )
 
 app = FastAPI(
-    title="Lu Estilos API",
+    title="Ecommercie API",
     version="1.0.0",
     openapi_tags=[
         {"name": "Auth", "description": "Rotas de autenticação"},
