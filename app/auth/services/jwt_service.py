@@ -2,9 +2,12 @@
 from datetime import datetime, timedelta
 from uuid import uuid4
 from jose import JWTError, jwt
+from app.utils.db.setup import load_security
 
-SECRET_KEY = "secretoforte"
-ALGORITHM = "HS256"
+security_config = load_security()
+
+SECRET_KEY = security_config.get("SECRET_KEY")
+ALGORITHM = security_config.get("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = 15
 REFRESH_TOKEN_EXPIRE_DAYS = 7
 
